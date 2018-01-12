@@ -34,7 +34,7 @@ class Remote {
             $to_disk => Storage::disk($to_disk)->getDriver(),
         ]);
 
-        if (!Storage::disk($from_disk)->exists($from)) {
+        if (!$manager->has($from)) {
             throw new InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
         }
 
@@ -90,7 +90,7 @@ class Remote {
             $to_disk => Storage::disk($to_disk)->getDriver(),
         ]);
 
-        if (!Storage::disk($from_disk)->exists($from)) {
+        if (!$manager->has($from)) {
             throw new InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
         }
 
@@ -124,16 +124,17 @@ class Remote {
             $to_disk => Storage::disk($to_disk)->getDriver(),
         ]);
 
-        if (!Storage::disk($from_disk)->exists($from)) {
+        if (!$manager->has($from)) {
             throw new InvalidArgumentException('Source file doesn\'t exist: ' . $from);
         }
 
-        if (Storage::disk($to_disk)->has($to)) {
+        if ($manager->has($to)) {
             if (!$overwrite) {
                 return FALSE;
             }
-            Storage::disk($to_disk)->delete($to);
+            $manager->delete($to);
         }
+
 
         return $manager->copy($from, $to);
 
@@ -165,15 +166,15 @@ class Remote {
             $to_disk => Storage::disk($to_disk)->getDriver(),
         ]);
 
-        if (!Storage::disk($from_disk)->exists($from)) {
+        if (!$manager->has($from)) {
             throw new InvalidArgumentException('Source file doesn\'t exist: ' . $from);
         }
 
-        if (Storage::disk($to_disk)->has($to)) {
+        if ($manager->has($to)) {
             if (!$overwrite) {
                 return FALSE;
             }
-            Storage::disk($to_disk)->delete($to);
+            $manager->delete($to);
         }
 
         return $manager->move($from, $to);
