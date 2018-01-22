@@ -45,7 +45,7 @@ class Remote {
             if ($content['type'] == 'file') {
 
                 $from_path = $from_disk . '://' . $content['path'];
-                $to_path = str_finish($to, '/') . substr($content['path'], strlen($from_root) + 1);
+                $to_path = str_finish($to, '/') . substr($content['path'], strlen($from_root));
 
                 if ($manager->has($to_path)) {
                     if (!$overwrite) {
