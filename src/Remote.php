@@ -19,11 +19,11 @@ class Remote {
     public static function copyDirectory($from, $to, $recursive = TRUE, $overwrite = TRUE) {
 
         if (strpos($from, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $from);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
         }
 
         if (strpos($to, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $to);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $to);
         }
 
         list($from_disk, $from_root) = explode('://', $from, 2);
@@ -35,7 +35,7 @@ class Remote {
         ]);
 
         if (!$manager->has($from)) {
-            throw new InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
+            throw new \InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
         }
 
         $contents = $manager->listContents($from, $recursive);
@@ -73,11 +73,11 @@ class Remote {
     public static function moveDirectory($from, $to, $overwrite = TRUE) {
 
         if (strpos($from, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $from);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
         }
 
         if (strpos($to, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $to);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $to);
         }
 
         Remote::copyDirectory($from, $to, TRUE, $overwrite);
@@ -91,7 +91,7 @@ class Remote {
         ]);
 
         if (!$manager->has($from)) {
-            throw new InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
+            throw new \InvalidArgumentException('Source directory doesn\'t exist: ' . $from);
         }
 
         $manager->deleteDir($from);
@@ -109,11 +109,11 @@ class Remote {
     public static function copy($from, $to, $overwrite = TRUE) {
 
         if (strpos($from, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $from);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
         }
 
         if (strpos($to, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $to);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $to);
         }
 
         $from_disk = strstr($from,  ':', TRUE);
@@ -125,7 +125,7 @@ class Remote {
         ]);
 
         if (!$manager->has($from)) {
-            throw new InvalidArgumentException('Source file doesn\'t exist: ' . $from);
+            throw new \InvalidArgumentException('Source file doesn\'t exist: ' . $from);
         }
 
         if ($manager->has($to)) {
@@ -151,11 +151,11 @@ class Remote {
     public static function move($from, $to, $overwrite = TRUE) {
 
         if (strpos($from, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $from);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
         }
 
         if (strpos($to, '://') < 1) {
-            throw new InvalidArgumentException('No prefix detected in path: ' . $to);
+            throw new \InvalidArgumentException('No prefix detected in path: ' . $to);
         }
 
         $from_disk = strstr($from,  ':', TRUE);
@@ -167,7 +167,7 @@ class Remote {
         ]);
 
         if (!$manager->has($from)) {
-            throw new InvalidArgumentException('Source file doesn\'t exist: ' . $from);
+            throw new \InvalidArgumentException('Source file doesn\'t exist: ' . $from);
         }
 
         if ($manager->has($to)) {
