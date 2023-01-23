@@ -5,7 +5,8 @@ namespace FilippoToso\Remote;
 use League\Flysystem\MountManager;
 use Illuminate\Support\Facades\Storage;
 
-class Remote {
+class Remote
+{
 
     /**
      * Copy a directory recursively and with optional overwriting
@@ -16,7 +17,8 @@ class Remote {
      * @param  boolean       $overwrite If enabled the destination files are overwritten
      * @return void
      */
-    public static function copyDirectory($from, $to, $recursive = TRUE, $overwrite = TRUE) {
+    public static function copyDirectory($from, $to, $recursive = TRUE, $overwrite = TRUE)
+    {
 
         if (strpos($from, '://') < 1) {
             throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
@@ -44,8 +46,8 @@ class Remote {
 
             if ($content['type'] == 'file') {
 
-                $from_path = $from_disk . '://' . $content['path'];
-                $to_path = str_finish($to, '/') . substr($content['path'], strlen($from_root));
+                $from_path = $content['path'];
+                $to_path = $to . substr($content['path'], strlen($from));
 
                 if ($manager->has($to_path)) {
                     if (!$overwrite) {
@@ -55,11 +57,8 @@ class Remote {
                 }
 
                 $manager->copy($from_path, $to_path);
-
             }
-
         }
-
     }
 
     /**
@@ -70,7 +69,8 @@ class Remote {
      * @param  boolean       $overwrite If enabled the destination files are overwritten
      * @return void
      */
-    public static function moveDirectory($from, $to, $overwrite = TRUE) {
+    public static function moveDirectory($from, $to, $overwrite = TRUE)
+    {
 
         if (strpos($from, '://') < 1) {
             throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
@@ -95,7 +95,6 @@ class Remote {
         }
 
         $manager->deleteDir($from);
-
     }
 
     /**
@@ -106,7 +105,8 @@ class Remote {
      * @param  boolean       $overwrite If enabled the destination file is overwritten
      * @return void
      */
-    public static function copy($from, $to, $overwrite = TRUE) {
+    public static function copy($from, $to, $overwrite = TRUE)
+    {
 
         if (strpos($from, '://') < 1) {
             throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
@@ -137,7 +137,6 @@ class Remote {
 
 
         return $manager->copy($from, $to);
-
     }
 
     /**
@@ -148,7 +147,8 @@ class Remote {
      * @param  boolean       $overwrite If enabled the destination file is overwritten
      * @return void
      */
-    public static function move($from, $to, $overwrite = TRUE) {
+    public static function move($from, $to, $overwrite = TRUE)
+    {
 
         if (strpos($from, '://') < 1) {
             throw new \InvalidArgumentException('No prefix detected in path: ' . $from);
@@ -178,7 +178,5 @@ class Remote {
         }
 
         return $manager->move($from, $to);
-
     }
-
 }
